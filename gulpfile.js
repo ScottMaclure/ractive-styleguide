@@ -1,5 +1,12 @@
-var gulp = require('gulp');
-var server = require('gulp-server-livereload');
+var gulp = require('gulp'),
+	sass = require('gulp-sass'),
+	server = require('gulp-server-livereload');
+
+gulp.task('build-sass', function () {
+	gulp.src('node_modules/zurb-foundation-5/scss/*.scss')
+		.pipe(sass())
+		.pipe(gulp.dest('css/foundation'));
+});
 
 gulp.task('webserver', function() {
 	gulp.src('./')
@@ -10,6 +17,6 @@ gulp.task('webserver', function() {
 	}));
 });
 
-gulp.task('default', ['webserver'], function() {
-	// TODO
+gulp.task('default', [ 'build-sass', 'webserver'], function() {
+	// TODO - watch task.
 });
